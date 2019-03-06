@@ -1,6 +1,7 @@
 #include "ujevois.h"
 #include <string>
 
+
 /*constructor*/
 uJevois::uJevois()
 {
@@ -71,17 +72,21 @@ break;
 };
 }
 
+
 void uJevois::updateJevois(){
 	switch(this->module){
 	case aruco:
+	{
 		this->fromSerial=this->serialobj.readStringUntil("\n");
-		this->ID= stoi (this->fromSerial.substr(this->fromSerial.rfind("id"),2));
-		this->fromSerial.rfind("x");
-		this->fromSerial.rfind("y");
-		this->fromSerial.rfind("w");
-		this->fromSerial.rfind("h");
+		string IDchar=this->fromSerial.substr(this->fromSerial.rfind("id:"),2);
+		this->ID=StringToNumber(IDchar);
+		this->fromSerial.rfind("x:");
+		this->fromSerial.rfind("y:");
+		this->fromSerial.rfind("w:");
+		this->fromSerial.rfind("h:");
 		//doing something, parsing serial output
 		//return the ID of aruco marker and position
+	}
 	break;
 	case gate:
 		//doing something, parsing serial output
@@ -128,4 +133,12 @@ bool uJevois::sendStringAndCheck(string payload, string wantedreply){
 
     return ok;
 }
+
+
+  int StringToNumber ( const string &Text )
+  {
+     istringstream ss(Text);
+     int result;
+     return ss >> result ? result : 0;
+  }
 

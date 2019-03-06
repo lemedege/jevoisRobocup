@@ -4,6 +4,7 @@
 #include <iostream>
 //#include "urun.h"
 #include "TimeoutSerial.h"
+#include <stdlib.h>
 
 #define SERIAL_PORT "/dev/ttyACM0"
 #define BAUDRATE 115200
@@ -55,7 +56,7 @@ bool sendStringAndCheck(string payload, string reply);
 
 };
 
-
+int StringToNumber(const string &Text);
 
 /**/
 void getArUco(uJevois *jev);
